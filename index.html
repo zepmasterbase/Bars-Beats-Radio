@@ -50,26 +50,31 @@ nav a:hover{color:orange;}
 .hero-text p{font-size:1.5rem;margin-bottom:40px;}
 .now-playing{font-size:1rem;color:#ccc;margin-top:10px;}
 
-/* Player */
+/* Music Player (Futuristic Glassmorphic) */
 .player{
-  position:fixed;bottom:0;width:100%;background:#1f1f1f;display:flex;align-items:center;justify-content:space-between;
-  padding:10px 50px;box-shadow:0 -5px 20px rgba(255,127,80,0.7);z-index:999;
+  position:fixed;bottom:0;width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 50px;box-shadow:0 -5px 30px rgba(255,127,80,0.8);z-index:999;
+  background:rgba(30,30,30,0.7);backdrop-filter:blur(10px);border-top:2px solid orange;border-radius:15px 15px 0 0;
 }
 .player-left{display:flex;align-items:center;gap:20px;}
-.player-left img{width:80px;height:80px;border-radius:12px;object-fit:cover;transition:0.5s;}
+.player-left img{width:80px;height:80px;border-radius:50%;object-fit:cover;animation:pulse 2s infinite;}
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+}
 .track-info{display:flex;flex-direction:column;justify-content:center;}
 .track-info span{font-weight:bold;}
 .player-controls{display:flex;align-items:center;gap:15px;}
 .player-controls button{background:none;border:none;color:#fff;font-size:1.5rem;transition:0.3s;}
 .player-controls button:hover{color:orange;}
 .progress-container{flex:1;height:6px;background:#333;margin:0 20px;border-radius:3px;overflow:hidden;}
-.progress{width:0%;height:100%;background:orange;transition:width 0.1s linear;}
+.progress{width:0%;height:100%;background:linear-gradient(90deg, orange, #ffb347);transition:width 0.1s linear;}
 .live-indicator{display:flex;align-items:center;gap:5px;color:red;font-weight:bold;}
 .volume{display:flex;align-items:center;gap:5px;}
 .volume input{width:100px;}
 
-/* Neon waveform behind album */
-.waveform{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);
+/* Waveform behind player */
+.waveform{position:absolute;bottom:120px;left:50%;transform:translateX(-50%);
 display:flex;gap:4px;z-index:1;}
 .waveform div{width:6px;height:20px;background:orange;border-radius:3px;animation:wave 1s infinite ease-in-out;}
 .waveform div:nth-child(2){animation-delay:0.1s;}
@@ -127,7 +132,6 @@ footer a:hover{color:#fff;}
     <h1>WE ARE LIVE</h1>
     <p class="now-playing" id="now-playing">NOW PLAYING<br>Track Title – Artist Name</p>
   </div>
-  <!-- Neon waveform -->
   <div class="waveform">
     <div></div><div></div><div></div><div></div><div></div>
   </div>
@@ -136,7 +140,7 @@ footer a:hover{color:#fff;}
 <!-- Player -->
 <div class="player">
   <div class="player-left">
-    <img id="album-art" src="https://images.unsplash.com/photo-1584992852255-6c20b780f51f?fit=crop&w=80&q=80" alt="Album Art">
+    <img id="album-art" src="https://images.unsplash.com/photo-1599071657192-48979a820567?fit=crop&w=80&q=80" alt="Album Art">
     <div class="track-info">
       <span id="track-title">Track Title</span>
       <span id="track-artist">Artist Name</span>
@@ -161,19 +165,19 @@ footer a:hover{color:#fff;}
   <h2>Latest Tracks</h2>
   <div class="track-grid">
     <div class="track-card">
-      <img src="https://images.unsplash.com/photo-1590073245816-b3cfe7d6d3d6?fit=crop&w=300&q=80" alt="Track 1">
+      <img src="https://images.unsplash.com/photo-1599071657192-48979a820567?fit=crop&w=300&q=80" alt="Track 1">
       <h3>Free Hip-Hop Beat</h3>
       <p>Artist: Public CC</p>
       <button onclick="playTrackIndex(0)">Play</button>
     </div>
     <div class="track-card">
-      <img src="https://images.unsplash.com/photo-1605902711622-cfb43c443e9c?fit=crop&w=300&q=80" alt="Track 2">
+      <img src="https://images.unsplash.com/photo-1606391703894-c63f0e0b9f3b?fit=crop&w=300&q=80" alt="Track 2">
       <h3>Upbeat Groove</h3>
       <p>Artist: Free Sample</p>
       <button onclick="playTrackIndex(1)">Play</button>
     </div>
     <div class="track-card">
-      <img src="https://images.unsplash.com/photo-1605902711633-27bb1cce21b7?fit=crop&w=300&q=80" alt="Track 3">
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=300&q=80" alt="Track 3">
       <h3>Trap Beat Loop</h3>
       <p>Artist: Royalty Free</p>
       <button onclick="playTrackIndex(2)">Play</button>
@@ -211,9 +215,9 @@ footer a:hover{color:#fff;}
 
 <script>
 const tracks=[
-  {title:"Free Hip-Hop Beat",artist:"Public CC",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/FreeHipHopBeat.mp3",art:"https://images.unsplash.com/photo-1590073245816-b3cfe7d6d3d6?fit=crop&w=80&q=80"},
-  {title:"Upbeat Groove",artist:"Free Sample",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/UpbeatGroove.mp3",art:"https://images.unsplash.com/photo-1605902711622-cfb43c443e9c?fit=crop&w=80&q=80"},
-  {title:"Trap Beat Loop",artist:"Royalty Free",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/TrapBeatLoop.mp3",art:"https://images.unsplash.com/photo-1605902711633-27bb1cce21b7?fit=crop&w=80&q=80"}
+  {title:"Free Hip-Hop Beat",artist:"Public CC",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/FreeHipHopBeat.mp3",art:"https://images.unsplash.com/photo-1599071657192-48979a820567?fit=crop&w=80&q=80"},
+  {title:"Upbeat Groove",artist:"Free Sample",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/UpbeatGroove.mp3",art:"https://images.unsplash.com/photo-1606391703894-c63f0e0b9f3b?fit=crop&w=80&q=80"},
+  {title:"Trap Beat Loop",artist:"Royalty Free",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/TrapBeatLoop.mp3",art:"https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=80&q=80"}
 ];
 let currentTrack=0;
 const audio=new Audio();
@@ -267,6 +271,5 @@ document.getElementById('volume').addEventListener('input',(e)=>{
 // Initialize
 updatePlayer();
 </script>
-
 </body>
 </html>
