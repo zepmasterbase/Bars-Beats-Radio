@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bars & Beats Radio 🎧</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+    body { background-color:#0b0b0f; color:#fff; overflow-x:hidden; }
+    a { text-decoration:none; color:inherit; }
+    
+    /* Hero Section */
+    header {
+      position: relative;
+      text-align:center;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#0b0b0f,#1f1b2f);
+      overflow:hidden;
+    }
+    header img { width:150px; margin-bottom:20px; z-index:2; }
+    header h1 { font-family:'Orbitron',sans-serif; font-size:3rem; color:#ffcc00; text-shadow:0 0 10px #ffcc00,0 0 20px #ffcc00; z-index:2; }
+    header p { color:#ddd; margin-bottom:30px; z-index:2; }
+    .hero-buttons a {
+      display:inline-block; margin:10px; padding:12px 30px;
+      border:2px solid #ffcc00; border-radius:50px; color:#ffcc00; font-weight:500; text-transform:uppercase;
+      transition:0.3s;
+    }
+    .hero-buttons a:hover { background:#ffcc00; color:#0b0b0f; box-shadow:0 0 20px #ffcc00,0 0 40px #ffcc00; }
+
+    /* Animated Soundwaves in Hero */
+    .soundwave {
+      position:absolute; bottom:40px; width:80%; height:100px; display:flex; justify-content:space-around; align-items:flex-end; z-index:1;
+    }
+    .bar { width:10px; background:#ff66ff; margin:0 5px; animation:wave 1s infinite ease-in-out; }
+    .bar:nth-child(2) { animation-delay:0.1s; }
+    .bar:nth-child(3) { animation-delay:0.2s; }
+    .bar:nth-child(4) { animation-delay:0.3s; }
+    .bar:nth-child(5) { animation-delay:0.4s; }
+    @keyframes wave { 0%,100% { height:20px; } 50% { height:80px; } }
+
+    /* Tracks Section */
+    section.tracks { padding:60px 20px; text-align:center; }
+    section.tracks h2 { font-family:'Orbitron',sans-serif; font-size:2.5rem; margin-bottom:40px; color:#ff66ff; text-shadow:0 0 10px #ff66ff; }
+    .track-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; justify-items:center; }
+    .track-card {
+      background:#111; border-radius:15px; padding:15px; width:100%; max-width:250px;
+      box-shadow:0 0 10px #ff66ff55; position:relative; overflow:hidden;
+      transition:0.3s; cursor:pointer;
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .track-card img { width:100%; border-radius:10px; margin-bottom:10px; transition:0.3s; }
+    .track-card h3 { font-size:1.1rem; margin-bottom:5px; color:#ffcc00; text-shadow:0 0 5px #ffcc00; }
+    .track-card p { font-size:0.9rem; color:#ccc; margin-bottom:10px; }
+    .track-card button { padding:8px 15px; border:none; border-radius:25px; background:#ff66ff; color:#0b0b0f; font-weight:bold; cursor:pointer; transition:0.3s; width:100%; }
+    .track-card button:hover { background:#ffcc00; box-shadow:0 0 15px #ffcc00; }
+
+    /* Pulse animation for cards responding to audio */
+    .track-card.pulse { animation: pulseGlow 0.5s infinite; }
+    @keyframes pulseGlow {
+      0% { box-shadow:0 0 5px #ff66ff55; }
+      50% { box-shadow:0 0 20px #ff66ff99; transform: scale(1.05); }
+      100% { box-shadow:0 0 5px #ff66ff55; }
+    }
+
+    /* Submission Section */
+    section.submit { background:#111; padding:60px 20px; text-align:center; }
+    section.submit h2 { font-family:'Orbitron',sans-serif; font-size:2rem; margin-bottom:30px; color:#ffcc00; }
+    section.submit form { display:flex; flex-direction:column; gap:15px; max-width:500px; margin:0 auto; }
+    section.submit input, section.submit textarea {
+      padding:12px; border-radius:10px; border:none; font-size:1rem;
+    }
+    section.submit button {
+      padding:12px; border:none; border-radius:50px; background:#ff66ff; color:#0b0b0f; font-weight:bold; cursor:pointer;
+      transition:0.3s;
+    }
+    section.submit button:hover { background:#ffcc00; color:#0b0b0f; box-shadow:0 0 15px #ffcc00; }
+
+    /* Footer */
+    footer { padding:40px 20px; text-align:center; background:#111; color:#aaa; font-size:0.9rem; }
+    footer a { color:#ff66ff; transition:0.3s; }
+    footer a:hover { color:#ffcc00; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header>
+    <img src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jjbf4dqtipl1ju013s69ie100017.png" alt="Bars & Beats Radio Logo">
+    <h1>Bars & Beats Radio 🎧</h1>
+    <p>The digital cypher for hip-hop heads. Rap • Drill • Trap • Freestyle</p>
+
+    <!-- Live Radio Player -->
+    <audio id="livePlayer" controls autoplay style="width:300px; margin-bottom:20px;">
+      <source src="YOUR_SHOUTCAST_OR_ICECAST_STREAM_URL_HERE" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <div class="hero-buttons">
+      <a href="#listen">Listen Live</a>
+      <a href="#submit">Submit Your Track</a>
+      <a href="https://t.me/YourTelegramLink" target="_blank">Join Telegram</a>
+    </div>
+
+    <!-- Animated Soundwave Bars -->
+    <div class="soundwave">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </header>
+
+  <!-- Trending Tracks Section -->
+  <section class="tracks" id="listen">
+    <h2>🔥 Trending Tracks</h2>
+    <div class="track-grid">
+      <div class="track-card">
+        <img src="artist1.jpg" alt="Track 1">
+        <h3>Odo Flow</h3>
+        <p>Jay Bahd</p>
+        <button onclick="playTrack('track1.mp3')">Play</button>
+      </div>
+      <div class="track-card">
+        <img src="artist2.jpg" alt="Track 2">
+        <h3>Kwaku The Traveller</h3>
+        <p>Black Sherif</p>
+        <button onclick="playTrack('track2.mp3')">Play</button>
+      </div>
+      <div class="track-card">
+        <img src="artist3.jpg" alt="Track 3">
+        <h3>Pain</h3>
+        <p>Sarkodie</p>
+        <button onclick="playTrack('track3.mp3')">Play</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submission Section -->
+  <section class="submit" id="submit">
+    <h2>Submit Your Track 🎤</h2>
+    <form>
+      <input type="text" placeholder="Artist Name" required>
+      <input type="text" placeholder="Track Title" required>
+      <input type="url" placeholder="Audio Link (MP3 / SoundCloud)" required>
+      <textarea placeholder="Short Bio / Socials" rows="3"></textarea>
+      <button type="submit">Submit Track</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Bars & Beats Radio 🎧 | Follow us on <a href="https://t.me/YourTelegramLink" target="_blank">Telegram</a>
+  </footer>
+
+  <!-- JavaScript for track play + pulsing animation -->
+  <script>
+    const cards = document.querySelectorAll('.track-card');
+    const player = document.getElementById('livePlayer');
+
+    function playTrack(url){
+      player.src = url;
+      player.play();
+      // Animate the card
+      cards.forEach(c => c.classList.remove('pulse'));
+      event.target.parentElement.classList.add('pulse');
+    }
+  </script>
+
+</body>
+</html>
