@@ -92,19 +92,24 @@ section h2{font-family:'Orbitron',sans-serif;font-size:2.5rem;margin-bottom:40px
 .player{
   position:fixed;bottom:0;width:100%;display:flex;align-items:center;justify-content:space-between;
   padding:10px 50px;z-index:999;
-  background:rgba(30,30,30,0.8);backdrop-filter:blur(10px);
+  background:rgba(30,30,30,0.85);backdrop-filter:blur(12px);
   border-top:2px solid orange;border-radius:15px 15px 0 0;
-  box-shadow:0 -5px 30px rgba(255,127,80,0.8);
+  box-shadow:0 -5px 30px rgba(255,127,80,0.9);
 }
 .player-left{display:flex;align-items:center;gap:20px;}
-.player-left img{width:80px;height:80px;border-radius:50%;object-fit:cover;animation:pulse 2s infinite;}
+.player-left img{
+  width:80px;height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  animation:pulse 2s infinite;
+}
 @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
 .track-info{display:flex;flex-direction:column;justify-content:center;}
-.track-info span{font-weight:bold;}
+.track-info span{font-weight:bold;color:#fff;}
 .player-controls{display:flex;align-items:center;gap:20px;}
 .player-controls button{
   background:none;border:none;color:#fff;font-size:1.5rem;transition:0.3s;display:flex;align-items:center;justify-content:center;
-  width:40px;height:40px;border-radius:50%;border:1px solid #555;
+  width:45px;height:45px;border-radius:50%;border:1px solid #555;
 }
 .player-controls button:hover{background:orange;color:#121212;}
 .progress-container{flex:1;height:6px;background:#333;margin:0 20px;border-radius:3px;overflow:hidden;}
@@ -180,7 +185,7 @@ section h2{font-family:'Orbitron',sans-serif;font-size:2.5rem;margin-bottom:40px
 <!-- Footer / Player -->
 <div class="player">
   <div class="player-left">
-    <img id="album-art" src="https://images.unsplash.com/photo-1599071657192-48979a820567?fit=crop&w=80&q=80" alt="Album Art">
+    <img id="album-art" src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jjbf4dqtipl1ju013s69ie100017.png" alt="Player Album Art">
     <div class="track-info">
       <span id="track-title">Track Title</span>
       <span id="track-artist">Artist Name</span>
@@ -203,9 +208,9 @@ section h2{font-family:'Orbitron',sans-serif;font-size:2.5rem;margin-bottom:40px
 <script>
 // Playlist with real free tracks
 const tracks=[
-  {title:"Free Hip-Hop Beat",artist:"Public CC",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/FreeHipHopBeat.mp3",art:"https://images.unsplash.com/photo-1599071657192-48979a820567?fit=crop&w=80&q=80"},
-  {title:"Upbeat Groove",artist:"Free Sample",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/UpbeatGroove.mp3",art:"https://images.unsplash.com/photo-1606391703894-c63f0e0b9f3b?fit=crop&w=80&q=80"},
-  {title:"Trap Beat Loop",artist:"Royalty Free",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/TrapBeatLoop.mp3",art:"https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?fit=crop&w=80&q=80"}
+  {title:"Free Hip-Hop Beat",artist:"Public CC",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/FreeHipHopBeat.mp3",art:"https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jjbf4dqtipl1ju013s69ie100017.png"},
+  {title:"Upbeat Groove",artist:"Free Sample",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/UpbeatGroove.mp3",art:"https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jjbf4dqtipl1ju013s69ie100017.png"},
+  {title:"Trap Beat Loop",artist:"Royalty Free",src:"https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/PublicDomain/TrapBeatLoop.mp3",art:"https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jjbf4dqtipl1ju013s69ie100017.png"}
 ];
 let currentTrack=0;
 const audio=new Audio();
