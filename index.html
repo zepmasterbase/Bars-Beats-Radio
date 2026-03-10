@@ -1,237 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bars & Beats Radio 🎧</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-    body {
-      background-color: #0b0b0f;
-      color: #fff;
-      overflow-x: hidden;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    /* Header / Hero Section */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0b0b0f, #1f1b2f);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
-      top: -50%;
-      left: -50%;
-      animation: rotateBG 60s linear infinite;
-      z-index: 0;
-    }
-    @keyframes rotateBG {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    header img {
-      width: 150px;
-      z-index: 1;
-      margin-bottom: 20px;
-    }
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      color: #ffcc00;
-      margin-bottom: 10px;
-      z-index: 1;
-      text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #ddd;
-      margin-bottom: 30px;
-      z-index: 1;
-    }
-    .hero-buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 30px;
-      border: 2px solid #ffcc00;
-      border-radius: 50px;
-      color: #ffcc00;
-      font-weight: 500;
-      transition: 0.3s;
-      text-transform: uppercase;
-    }
-    .hero-buttons a:hover {
-      background: #ffcc00;
-      color: #0b0b0f;
-      box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bars & Beats Radio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Global Styles */
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+  body { background-color:#121212; color:#fff; scroll-behavior:smooth; }
+  a { text-decoration:none; color:inherit; }
+  button { cursor:pointer; }
 
-    /* Tracks Section */
-    section.tracks {
-      padding: 60px 20px;
-      background: #0b0b0f;
-      text-align: center;
-    }
-    section.tracks h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      color: #ff66ff;
-      text-shadow: 0 0 10px #ff66ff;
-    }
-    .track-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-      justify-items: center;
-    }
-    .track-card {
-      background: #111;
-      border-radius: 15px;
-      padding: 15px;
-      width: 100%;
-      max-width: 250px;
-      transition: 0.3s;
-      box-shadow: 0 0 10px #ff66ff55;
-      position: relative;
-      overflow: hidden;
-    }
-    .track-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px #ff66ff, 0 0 40px #ff66ff;
-    }
-    .track-card img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      transition: 0.3s;
-    }
-    .track-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 5px;
-      color: #ffcc00;
-      text-shadow: 0 0 5px #ffcc00;
-    }
-    .track-card p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-bottom: 10px;
-    }
-    .track-card button {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 25px;
-      background: #ff66ff;
-      color: #0b0b0f;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      width: 100%;
-    }
-    .track-card button:hover {
-      background: #ffcc00;
-      color: #0b0b0f;
-      box-shadow: 0 0 15px #ffcc00;
-    }
+  /* Header Navigation */
+  header { display:flex; justify-content:space-between; align-items:center; padding:20px 50px; position:fixed; top:0; width:100%; background:rgba(18,18,18,0.9); z-index:1000; }
+  .logo { font-family:'Orbitron',sans-serif; font-weight:700; font-size:1.8rem; color:orange; }
+  nav { display:flex; gap:30px; justify-content:center; flex:1; }
+  nav a { font-weight:500; transition:0.3s; }
+  nav a:hover { color:orange; }
+  .header-right { display:flex; gap:20px; align-items:center; }
+  .lang-selector, .search-icon { font-weight:500; cursor:pointer; }
 
-    /* Footer */
-    footer {
-      padding: 40px 20px;
-      text-align: center;
-      background: #111;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: #ff66ff;
-      transition: 0.3s;
-    }
-    footer a:hover {
-      color: #ffcc00;
-    }
+  /* Hero Section */
+  .hero { display:flex; align-items:center; justify-content:flex-start; padding:0 50px; min-height:100vh; background:url('studio-headphones-vinyl.jpg') center/cover no-repeat; position:relative; }
+  .hero::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+  .hero-text { position:relative; z-index:2; max-width:600px; }
+  .hero-text h1 { font-size:4rem; font-family:'Orbitron',sans-serif; color:orange; margin-bottom:20px; }
+  .hero-text p { font-size:1.5rem; margin-bottom:40px; }
+  .now-playing { font-size:1rem; color:#ccc; margin-top:10px; }
 
-    /* Pulsing Animation */
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 5px #ff66ff55; }
-      50% { box-shadow: 0 0 20px #ff66ff99; }
-      100% { box-shadow: 0 0 5px #ff66ff55; }
-    }
-    .track-card {
-      animation: pulseGlow 2s infinite;
-    }
-  </style>
+  /* Sticky Music Player */
+  .player { position:fixed; bottom:0; width:100%; background:#1f1f1f; display:flex; align-items:center; justify-content:space-between; padding:10px 50px; box-shadow:0 -5px 10px rgba(0,0,0,0.5); z-index:999; }
+  .player-controls { display:flex; align-items:center; gap:20px; }
+  .player button { background:none; border:none; color:#fff; font-size:1.2rem; transition:0.3s; }
+  .player button:hover { color:orange; }
+  .progress-container { flex:1; height:5px; background:#333; margin:0 20px; border-radius:2px; overflow:hidden; }
+  .progress { width:0%; height:100%; background:orange; transition:width 0.1s linear; }
+  .live-indicator { display:flex; align-items:center; gap:5px; color:red; font-weight:bold; }
+
+  /* Sections */
+  section { padding:100px 50px 50px 50px; }
+  section h2 { font-family:'Orbitron',sans-serif; font-size:2.5rem; margin-bottom:40px; color:orange; }
+
+  /* Track Cards */
+  .track-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; }
+  .track-card { background:#1a1a1a; border-radius:15px; padding:15px; text-align:center; transition:0.3s; }
+  .track-card img { width:100%; border-radius:10px; margin-bottom:10px; }
+  .track-card h3 { font-size:1.1rem; color:orange; margin-bottom:5px; }
+  .track-card p { font-size:0.9rem; color:#ccc; margin-bottom:10px; }
+  .track-card button { padding:8px 15px; border:none; border-radius:25px; background:orange; color:#121212; font-weight:bold; width:100%; transition:0.3s; }
+  .track-card button:hover { box-shadow:0 0 15px orange; }
+
+  /* Submit Track */
+  .submit form { display:flex; flex-direction:column; gap:15px; max-width:500px; margin:0 auto; }
+  .submit input, .submit textarea { padding:12px; border-radius:10px; border:none; font-size:1rem; }
+  .submit button { padding:12px; border:none; border-radius:50px; background:orange; color:#121212; font-weight:bold; transition:0.3s; }
+  .submit button:hover { box-shadow:0 0 15px orange; }
+
+  /* Footer */
+  footer { padding:40px 50px; text-align:center; background:#111; color:#aaa; }
+  footer a { color:orange; transition:0.3s; }
+  footer a:hover { color:#fff; }
+
+</style>
 </head>
 <body>
 
-  <!-- Hero Section -->
-  <header>
-    <img src="https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1jjbf4dqtipl1ju013s69ie100017.png" alt="Bars & Beats Radio Logo">
-    <h1>Bars & Beats Radio 🎧</h1>
-    <p>The digital cypher for hip-hop heads. Rap • Drill • Trap • Freestyle</p>
-    <div class="hero-buttons">
-      <a href="#listen">Listen Live</a>
-      <a href="#submit">Submit Your Track</a>
-      <a href="https://t.me/YourTelegramLink" target="_blank">Join Telegram</a>
-    </div>
-  </header>
+<!-- Header Navigation -->
+<header>
+  <div class="logo">Bars & Beats Radio</div>
+  <nav>
+    <a href="#music">Music</a>
+    <a href="#events">Events</a>
+    <a href="#artists">Artists</a>
+    <a href="#blog">Blog</a>
+    <a href="#albums">Album</a>
+    <a href="#submit">Submit Track</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="header-right">
+    <div class="lang-selector">EN</div>
+    <div class="search-icon">🔍</div>
+  </div>
+</header>
 
-  <!-- Trending Tracks Section -->
-  <section class="tracks" id="listen">
-    <h2>🔥 Trending Tracks</h2>
-    <div class="track-grid">
-      <div class="track-card">
-        <img src="https://via.placeholder.com/250x250.png?text=Track+1" alt="Track 1">
-        <h3>Track Title 1</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
-      <div class="track-card">
-        <img src="https://via.placeholder.com/250x250.png?text=Track+2" alt="Track 2">
-        <h3>Track Title 2</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
-      <div class="track-card">
-        <img src="https://via.placeholder.com/250x250.png?text=Track+3" alt="Track 3">
-        <h3>Track Title 3</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
-      <div class="track-card">
-        <img src="https://via.placeholder.com/250x250.png?text=Track+4" alt="Track 4">
-        <h3>Track Title 4</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
-    </div>
-  </section>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>WE ARE LIVE</h1>
+    <p class="now-playing">NOW PLAYING<br>Artist Name – Track Title</p>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 Bars & Beats Radio 🎧 | Designed for hip-hop heads.  
-    <br>
-    Follow us on <a href="https://t.me/YourTelegramLink" target="_blank">Telegram</a>
-  </footer>
+<!-- Music Player -->
+<div class="player">
+  <div class="player-controls">
+    <button id="prev">⏮️</button>
+    <button id="play">▶️</button>
+    <button id="next">⏭️</button>
+  </div>
+  <div class="progress-container">
+    <div class="progress" id="progress"></div>
+  </div>
+  <div class="live-indicator"><span>●</span>LIVE</div>
+  <div class="volume">
+    🔊 <input type="range" min="0" max="1" step="0.01" id="volume">
+  </div>
+</div>
+
+<!-- Music Section -->
+<section id="music">
+  <h2>Latest Tracks</h2>
+  <div class="track-grid">
+    <div class="track-card">
+      <img src="artist1.jpg" alt="Track 1">
+      <h3>Track Title 1</h3>
+      <p>Artist Name</p>
+      <button onclick="playTrack('track1.mp3')">Play</button>
+    </div>
+    <div class="track-card">
+      <img src="artist2.jpg" alt="Track 2">
+      <h3>Track Title 2</h3>
+      <p>Artist Name</p>
+      <button onclick="playTrack('track2.mp3')">Play</button>
+    </div>
+  </div>
+</section>
+
+<!-- Submit Track Section -->
+<section id="submit" class="submit">
+  <h2>Submit Your Track to Bars & Beats Radio</h2>
+  <p>Artists can submit their music directly through our Telegram channel.</p>
+  <a href="https://t.me/YOUR_TELEGRAM_CHANNEL" target="_blank">
+    <button>Submit via Telegram</button>
+  </a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>Bars & Beats Radio | Live 24/7 Hip Hop • Beats • Underground Music</p>
+  <p>
+    <a href="#music">Music</a> |
+    <a href="#events">Events</a> |
+    <a href="#artists">Artists</a> |
+    <a href="#submit">Submit Track</a> |
+    <a href="#contact">Contact</a>
+  </p>
+  <p>
+    Social: 
+    <a href="#">Telegram</a> | 
+    <a href="#">Instagram</a> | 
+    <a href="#">YouTube</a> | 
+    <a href="#">Twitter</a>
+  </p>
+</footer>
+
+<script>
+  // Simple music player functionality
+  const playBtn = document.getElementById('play');
+  const progress = document.getElementById('progress');
+  const volume = document.getElementById('volume');
+  const audio = new Audio('YOUR_STREAM_URL_HERE');
+  let isPlaying = false;
+
+  playBtn.addEventListener('click', () => {
+    if(!isPlaying){ audio.play(); playBtn.textContent='⏸️'; isPlaying=true; }
+    else { audio.pause(); playBtn.textContent='▶️'; isPlaying=false; }
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const percent = (audio.currentTime/audio.duration)*100;
+    progress.style.width = percent+'%';
+  });
+
+  volume.addEventListener('input', () => { audio.volume = volume.value; });
+
+  function playTrack(url){
+    audio.src = url;
+    audio.play();
+    playBtn.textContent='⏸️';
+    isPlaying=true;
+  }
+</script>
 
 </body>
 </html>
